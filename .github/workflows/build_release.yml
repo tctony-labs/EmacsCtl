@@ -14,7 +14,10 @@ on:
 jobs:
   create-dmg:
     uses: ./.github/workflows/build_dmg.yml
-    secrets: inherit
+    secrets:
+      APPLE_ID_PASS: ${{ secrets.APPLE_ID_PASS }}
+      MACOS_APPLICATION_CERT_P12: ${{ secrets.MACOS_APPLICATION_CERT_P12 }}
+      MACOS_APPLICATION_CERT_P12_PASS: ${{ secrets.MACOS_APPLICATION_CERT_P12_PASS }}
 
   release:
     needs: create-dmg
@@ -57,4 +60,3 @@ jobs:
       pages: write
       id-token: write
     uses: ./.github/workflows/update.yml
-    secrets: inherit

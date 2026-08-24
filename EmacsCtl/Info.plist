@@ -5,7 +5,7 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>https://tctony.github.io/EmacsCtl/update.xml</string>
+	<string>https://tctony-labs.github.io/EmacsCtl/update.xml</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

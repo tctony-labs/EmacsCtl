@@ -29,7 +29,7 @@
 
 ### Install
 
-- Latest app can be downloaded from [Releases](https://github.com/tctony/EmacsCtl/releases) page.
+- Latest app can be downloaded from [Releases](../../releases) page.
 - Or you can clone this project and build your own.
 
 ### How to use

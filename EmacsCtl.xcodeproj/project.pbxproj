@@ -677,7 +677,7 @@
 				INFOPLIST_FILE = EmacsCtl/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "https://github.com/tctony";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "https://github.com/tctony-labs";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -715,7 +715,7 @@
 				INFOPLIST_FILE = EmacsCtl/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "https://github.com/tctony";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "https://github.com/tctony-labs";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -6,6 +6,13 @@ on:
   #     - 'debug-update'
   workflow_dispatch:
   workflow_call:
+    secrets:
+      APPLE_ID_PASS:
+        required: true
+      MACOS_APPLICATION_CERT_P12:
+        required: true
+      MACOS_APPLICATION_CERT_P12_PASS:
+        required: true
 
 jobs:
   build-app:
@@ -28,13 +35,13 @@ jobs:
       - name: Install Cert
         uses: apple-actions/import-codesign-certs@v2
         with:
-          p12-file-base64: ${{ secrets.CERT_P12 }}
-          p12-password: ${{ secrets.CERT_P12_PASS }}
+          p12-file-base64: ${{ secrets.MACOS_APPLICATION_CERT_P12 }}
+          p12-password: ${{ secrets.MACOS_APPLICATION_CERT_P12_PASS }}
 
       - name: Codesign
         run: |
           codesign --force --options runtime --deep \
-            --sign "${{ secrets.CERT_NAME }}" EmacsCtl.app
+            --sign "${{ vars.MACOS_APPLICATION_CERT_NAME }}" EmacsCtl.app
 
       - name: Set dmg filename
         run: |
@@ -69,9 +76,9 @@ jobs:
         uses: cocoalibs/xcode-notarization-action@v1
         with:
           app-path: '${{ env.DMG_FILE }}'
-          apple-id: ${{ secrets.APPLE_ID }}
+          apple-id: ${{ vars.APPLE_ID }}
           password: ${{ secrets.APPLE_ID_PASS }}
-          team-id: ${{ secrets.APPLE_TEAM_ID }}
+          team-id: ${{ vars.APPLE_TEAM_ID }}
           staple: 'true'
           keychain-profile: 'notarize'
           xcode-path: '/Applications/Xcode.app'

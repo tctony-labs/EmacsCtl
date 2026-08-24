@@ -21,7 +21,7 @@ It also acts as a URL handler for `org-protocol://` (registered via
 - **Bundle ID:** `com.tctony.EmacsCtl` (LaunchHelper: `com.tctony.EmacsCtl.LaunchHelper`)
 - **Deployment target:** macOS 13.5
 - **Dependencies (CocoaPods):** Sparkle (auto-update), MASShortcut (global hotkey)
-- **Update feed:** `https://tctony.github.io/EmacsCtl/update.xml` (Sparkle)
+- **Update feed:** `https://tctony-labs.github.io/EmacsCtl/update.xml` (Sparkle)
 - **Version source of truth:** `version.xcconfig` (`EMACSCTL_VERSION`)
 
 ## Layout
