@@ -21,7 +21,7 @@ jobs:
           echo "BUILD_OUT_DIR is ${{ env.BUILD_OUT_DIR }}"
 
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Build the app
         run: |
@@ -35,7 +35,7 @@ jobs:
           cd -
       
       - name: Upload app
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: EmacsCtl.zip
           path: ${{ env.BUILD_OUT_DIR }}/EmacsCtl.zip
