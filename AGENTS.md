@@ -183,10 +183,11 @@ grep -E "needsRestore|Restored" ~/.cache/emacsctl.log | tail
    git commit -m "bump version to <version>"
    git tag v<version>
    ```
-6. **Confirm with the user before pushing.** Show the exact `git push`
-   commands you intend to run and wait for explicit approval. Do not push
-   without confirmation.
-7. **Push branch and tag** (after confirmation):
+6. **Confirm before pushing unless the user explicitly requested a release.**
+   An explicit release request authorizes pushing the release branch and tag;
+   proceed without asking for confirmation again. Otherwise, show the exact
+   `git push` commands and wait for explicit approval before pushing.
+7. **Push branch and tag** (authorized by the release request or confirmation):
    ```bash
    git push origin HEAD
    git push origin v<version>
