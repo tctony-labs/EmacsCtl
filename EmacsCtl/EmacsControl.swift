@@ -295,17 +295,12 @@ class EmacsControl: NSObject {
 
             let args: [String]
             if elisp.isEmpty {
+                // Focus Emacs before opening the file so LSP prompts are visible.
+                bringEmacsWindowToFront()
                 args = buildEmacsClientArgs(["-n", absolutePath])
             } else {
                 args = buildEmacsClientArgs(["-n", "--eval", elisp])
             }
-
-            // Bring Emacs to front *before* the eval, so that even if the git
-            // open function blocks (e.g. it pops an interactive prompt), Emacs
-            // is already visible and the user can respond instead of the flow
-            // getting stuck behind a not-yet-foregrounded window.
-            // Avoid triggering toggle logic in focusOnEmacs.
-            bringEmacsWindowToFront()
 
             runShellCommand(EmacsClient, args) { code, msg in
                 Logger.info("openFile result: \(code) \(msg)")
