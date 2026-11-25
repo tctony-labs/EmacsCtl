@@ -8,6 +8,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
@@ -25,6 +26,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: macos-latest
+    env:
+      # GitHub retains artifacts from earlier attempts of the same run.
+      PAGES_ARTIFACT_NAME: github-pages-${{ github.run_attempt }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -52,8 +56,33 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
+          name: ${{ env.PAGES_ARTIFACT_NAME }}
           # Upload entire repository
           path: 'update'
+      - name: Wait for the Pages artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          max_checks=3
+          for ((attempt = 1; attempt <= max_checks; attempt++)); do
+            artifact_count=$(gh api --method GET \
+              "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" \
+              -f name="$PAGES_ARTIFACT_NAME" --jq '.total_count')
+            if [[ "$artifact_count" == 1 ]]; then
+              echo "Pages artifact $PAGES_ARTIFACT_NAME is visible."
+              exit 0
+            fi
+            if (( attempt == max_checks )); then
+              break
+            fi
+            echo "Pages artifact is not visible (check $attempt/$max_checks). Waiting 5 seconds."
+            sleep 5
+          done
+          echo "::error::$PAGES_ARTIFACT_NAME did not appear after $max_checks checks."
+          exit 1
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          artifact_name: ${{ env.PAGES_ARTIFACT_NAME }}
