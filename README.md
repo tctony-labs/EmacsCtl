@@ -10,7 +10,8 @@
 - Support edit captured content when using `org-roam-protocol`.
 - Register EmacsCtl as the default opener for configurable file extensions.
   - Route opens into the running Emacs session via `emacsclient`.
-  - Optionally running elisp function for files inside a git repo.
+  - Focus Emacs before opening a file directly so prompts such as LSP setup are visible.
+  - Optionally run an Elisp expression for files in a Git repository and let it focus the appropriate Emacs window.
 - Native macOS notifications via `emacsctl://notify` URL scheme.
   - Parameters: `title`, `body`, `group`, `actionType`, `actionEval`, `actionDeeplink`.
   - `actionType` defaults to `eval`: clicking evaluates `actionEval`, or focuses Emacs when it is omitted.
